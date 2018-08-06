@@ -149,11 +149,11 @@ return [
         /*
          * Package Service Providers...
          */
-        Vinkla\Algolia\AlgoliaServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
+        App\Providers\AppServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],

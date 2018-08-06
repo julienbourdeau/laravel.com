@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'algolia' => [
+        'id' => env('ALGOLIA_APP_ID', '8BB87I11DE'),
+        'search_key' => env('ALGOLIA_API_SEARCH_KEY', '8e1d446d61fce359f69cd7c8b86a50de'),
+        'key' => env('ALGOLIA_API_KEY', ''),
+    ],
+
 ];

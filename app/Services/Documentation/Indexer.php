@@ -2,10 +2,10 @@
 
 namespace App\Services\Documentation;
 
+use Algolia\AlgoliaSearch\Client;
 use ParsedownExtra;
 use App\CustomParser;
 use App\Documentation;
-use Vinkla\Algolia\AlgoliaManager;
 use Illuminate\Filesystem\Filesystem;
 
 class Indexer
@@ -20,14 +20,14 @@ class Indexer
     /**
      * The Algolia Index instance.
      *
-     * @var \AlgoliaSearch\Index
+     * @var \Algolia\AlgoliaSearch\Index
      */
     protected $index;
 
     /**
      * The Algolia client instance.
      *
-     * @var \AlgoliaSearch\Client
+     * @var Client
      */
     protected $client;
 
@@ -81,7 +81,7 @@ class Indexer
      * @param  Filesystem  $files
      * @return void
      */
-    public function __construct(AlgoliaManager $client, CustomParser $markdown, Filesystem $files)
+    public function __construct(Client $client, CustomParser $markdown, Filesystem $files)
     {
         $this->files = $files;
         $this->client = $client;
@@ -102,7 +102,7 @@ class Indexer
 
         $this->setSettings();
 
-        $this->client->moveIndex($this->index->indexName, static::$index_name);
+        $this->client->moveIndex($this->index->getName(), static::$index_name);
     }
 
     /**
@@ -183,7 +183,7 @@ class Indexer
             }
         }
 
-        $this->index->addObjects($markup);
+        $this->index->saveObjects($markup);
 
         echo "Indexed $version.$slug" . PHP_EOL;
     }
